@@ -1,15 +1,6 @@
 import { ApolloServer, gql } from "apollo-server";
 import fetch from "node-fetch";
 
-const options = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MDJkY2VjZjc5M2VhZDljMTgxM2FjOTFkNTVlODMzMyIsInN1YiI6IjYzMDEwMTQxYjM5ZTM1MDA4MmQ1YTI5OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4rzqk8JLgFsvNVb3qfyunf1Uyf1mAgbGCcDocYofMjg"
-  }
-};
-
 let db = [
   {
     id: "1",
@@ -40,17 +31,17 @@ const typeDefs = gql`
     author: User
   }
   type Query {
-    allMovies: [Movie!]!
+    allMovies: [Movies!]!
     allTweets: [Tweet!]!
     tweet(id: ID!): Tweet
-    getSingleMovie(id: ID!): SingleMovie
+    getSingleMovie(id: ID!): Movie
     getUser: [User]
   }
   type Mutation {
     postTweet(text: String!, userId: ID!): Tweet!
     deleteTweet(id: ID!): Boolean!
   }
-  type Movie {
+  type Movies {
     adult: Boolean
     backdrop_path: String
     id: Int
@@ -66,7 +57,7 @@ const typeDefs = gql`
     vote_count: Int
     genre_ids: [Int]
   }
-  type SingleMovie {
+  type Movie {
     adult: Boolean
     backdrop_path: String
     budget: Int
@@ -110,6 +101,14 @@ const resolvers = {
         .then((json) => json.results);
     },
     getSingleMovie(__, { id }) {
+      const options = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MDJkY2VjZjc5M2VhZDljMTgxM2FjOTFkNTVlODMzMyIsInN1YiI6IjYzMDEwMTQxYjM5ZTM1MDA4MmQ1YTI5OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4rzqk8JLgFsvNVb3qfyunf1Uyf1mAgbGCcDocYofMjg"
+        }
+      };
       const url = `https://api.themoviedb.org/3/movie/${id}`;
       return fetch(url, options)
         .then((res) => res.json())
