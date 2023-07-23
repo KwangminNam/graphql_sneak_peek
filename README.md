@@ -1,6 +1,7 @@
 # Graphql 맛보기
 
-# Graphql benefit (REST API를 두고 Graphql을 쓰는 대표적인 이유 두가지)
+# Graphql benefit 
+# (REST API를 두고 Graphql을 쓰는 대표적인 이유 두가지)
 1. Overfetching
 필요한 데이터보다 더 많은 데이터를 fetch하는 것을 말합니다.
 GraphQL을 사용하면 API에 GraphQL 쿼리를 보내고 필요한 것만정확히 얻을 수 있습니다.
