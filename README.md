@@ -1,5 +1,3 @@
-# Graphql 맛보기
-
 # Graphql benefit 
 # (REST API를 두고 Graphql을 쓰는 대표적인 이유 두가지)
 1. Overfetching
